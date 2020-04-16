@@ -18,7 +18,7 @@ dp[i - 1][j] 不装第 i 个物品
 val[i - 1] + dp[i-1][w - wt[i - 1]] 装第 i 个物品
 """
 
-func maxValue(_ w:Int, _ n:Int, _ wt:[Int], _ val:[Int]) -> Int {
+func knapsack(_ w:Int, _ n:Int, _ wt:[Int], _ val:[Int]) -> Int {
     
     var dp = Array(repeating: Array(repeating: 0, count: w + 1), count: n + 1)
     

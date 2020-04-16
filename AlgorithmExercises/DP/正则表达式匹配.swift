@@ -83,43 +83,42 @@ fileprivate let remind =
 """
 
 // dp
-class RegularSolution {
-    func isMatch(_ s: String, _ p: String) -> Bool {
-        let sArr = Array(s)
-        let pArr = Array(p)
-        // 默认全为false
-        var dp = Array(repeating: Array(repeating: false, count: p.count + 1), count: s.count + 1)
-        dp[0][0] = true
-        //填充 dp[0][...]
-        for i in 0..<p.count{
-            if pArr[i] == "*" && dp[0][i-1]{
-                dp[0][i+1] = true
-            }
+
+func isMatch(_ s: String, _ p: String) -> Bool {
+    let sArr = Array(s)
+    let pArr = Array(p)
+    // 默认全为false
+    var dp = Array(repeating: Array(repeating: false, count: p.count + 1), count: s.count + 1)
+    dp[0][0] = true
+    //填充 dp[0][...]
+    for i in 0..<p.count{
+        if pArr[i] == "*" && dp[0][i-1]{
+            dp[0][i+1] = true
         }
-        for i in 0..<s.count{
-            for j in 0..<p.count{
-                if pArr[j] == sArr[i]{
-                    dp[i+1][j+1] = dp[i][j]
-                }else if pArr[j] == "."{
-                    dp[i+1][j+1] = dp[i][j]
-                }else if pArr[j] == "*"{
-                    if pArr[j-1] != sArr[i] && pArr[j-1] != "."{
-                        // * 匹配0次
-                        dp[i+1][j+1] = dp[i+1][j-1];
-                    }else{
-                        // * 匹配多次 dp[i+1][j]
-                        // * 匹配0次 dp[i+1][j-1]
-                        dp[i+1][j+1] = dp[i][j+1] || dp[i+1][j-1]
-                    }
+    }
+    for i in 0..<s.count{
+        for j in 0..<p.count{
+            if pArr[j] == sArr[i]{
+                dp[i+1][j+1] = dp[i][j]
+            }else if pArr[j] == "."{
+                dp[i+1][j+1] = dp[i][j]
+            }else if pArr[j] == "*"{
+                if pArr[j-1] != sArr[i] && pArr[j-1] != "."{
+                    // * 匹配0次
+                    dp[i+1][j+1] = dp[i+1][j-1];
+                }else{
+                    // * 匹配多次 dp[i+1][j]
+                    // * 匹配0次 dp[i+1][j-1]
+                    dp[i+1][j+1] = dp[i][j+1] || dp[i+1][j-1]
                 }
             }
         }
-        return dp[s.count][p.count]
     }
+    return dp[s.count][p.count]
 }
 
 /// memo
-class RegularSolution2 {
+class RegularSolution {
     var memo = [[Bool?]]()
 
     func isMatch(_ s: String, _ p: String) -> Bool {
