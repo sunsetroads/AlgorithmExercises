@@ -69,8 +69,8 @@ func longestPalindromeSubseq(_ s: String) -> Int {
         dp[i][i] = 1
     }
     
-    for i in (0..<sArr.count - 1).reversed() {
-        for j in i + 1..<sArr.count{
+   for j in 1..<sArr.count {
+        for i in (0..<j).reversed() {
             if sArr[i] == sArr[j] {
                 dp[i][j] = dp[i + 1][j - 1] + 2
             } else {
